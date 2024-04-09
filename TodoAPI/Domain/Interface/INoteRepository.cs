@@ -1,6 +1,6 @@
-﻿using TodoAPI.Domain.Models;
+﻿using TodoListAPI.Domain.Models;
 
-namespace TodoAPI.Domain.Interface
+namespace TodoListAPI.Domain.Interface
 {
     public interface INoteRepository
     {
