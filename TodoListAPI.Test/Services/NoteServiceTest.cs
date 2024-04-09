@@ -35,13 +35,25 @@ namespace TodoListAPI.Test.Services
 		}
 
 		[Fact]
-		public async void CreateNewNoteAsync()
+		public async void GetNoteAsync()
 		{
 			//// Arrange
 			var noteVO = new NoteVO() { Description = "Description test" };
 
 			var note = await _noteService.Create(noteVO);
 			var isCreate = note.Id > 0;
+
+			Assert.True(isCreate);
+		}
+
+		[Fact]
+		public async void CreateNoteAsync()
+		{
+			var noteVO = new NoteVO() { Description = "Description test" };
+
+			var note = await _noteService.Create(noteVO);
+			var isCreate = note.Id > 0;
+
 			Assert.True(isCreate);
 		}
 
@@ -54,9 +66,18 @@ namespace TodoListAPI.Test.Services
 			var note = await _noteService.Update(1, noteVO);
 			var isCreate = note.Id > 0;
 			Assert.True(isCreate);
-
-			//Assert.True(true);
 		}
 
+		[Fact]
+		public async void DeleteNoteAsync()
+		{
+			// Arrange
+			var id = 1;
+
+			var isDeleted = await _noteService.Delete(id);
+
+			Assert.True(isDeleted);
+
+		}
 	}
 }

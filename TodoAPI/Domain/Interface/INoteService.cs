@@ -12,6 +12,6 @@ namespace TodoListAPI.Domain.Interface
 
 		Task<Notes> Update(int id, NoteVO note);
 
-		Task<Notes> Delete(int id);
+		Task<bool> Delete(int id);
 	}
 }

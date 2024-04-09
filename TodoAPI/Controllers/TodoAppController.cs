@@ -76,12 +76,12 @@ namespace TodoListAPI.Controllers
 		}
 
 		[HttpDelete]
-		public async Task<ActionResult> GetDelete(int id)
+		public async Task<ActionResult> Delete(int id)
 		{
 			try
 			{
-				var notes = await _noteService.Delete(id);
-				return Ok(notes);
+				var isDeleted = await _noteService.Delete(id);
+				return Ok(isDeleted);
 			}
 			catch (Exception ex)
 			{

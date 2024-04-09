@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TodoListAPI.Infra.Context;
 
@@ -11,9 +12,10 @@ using TodoListAPI.Infra.Context;
 namespace TodoListAPI.Migrations
 {
     [DbContext(typeof(DBTodoAPPContext))]
-    partial class DBTodoAPPContextModelSnapshot : ModelSnapshot
+    [Migration("20240409220906_Add field DateUpdate")]
+    partial class AddfieldDateUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

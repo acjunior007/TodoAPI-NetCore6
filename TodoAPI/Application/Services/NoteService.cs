@@ -29,6 +29,7 @@ namespace TodoListAPI.Application.Services
 
 			return _mapper.Map<NoteVO>(note);
 		}
+
 		public async Task<Notes> Create(NoteVO noteVO)
 		{
 			var noteEntity = _mapper.Map<Notes>(noteVO);
@@ -45,7 +46,7 @@ namespace TodoListAPI.Application.Services
 			return await _repository.Update(note);
 		}
 
-		public async Task<Notes> Delete(int id)
+		public async Task<bool> Delete(int id)
 		{
 			if (id <= 0)
 				throw new Exception("Id inválido!");

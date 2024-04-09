@@ -29,12 +29,12 @@ builder.Services.AddDbContext<DBTodoAPPContext>(options =>
 
 
 
+
 builder.Services.AddTransient<INoteRepository, NoteRepository>();
 builder.Services.AddTransient<INoteService, NoteService>();
 
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
-
 
 var app = builder.Build();
 
@@ -51,5 +51,14 @@ if (app.Environment.IsDevelopment())
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+	var services = scope.ServiceProvider;
+	var dbContext = services.GetRequiredService<DBTodoAPPContext>();
+	dbContext.Database.Migrate();
+}
+
+
 
 app.Run();
