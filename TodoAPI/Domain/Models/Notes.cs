@@ -9,7 +9,6 @@ namespace TodoListAPI.Domain.Models
 
 		[Required(ErrorMessage = "Informar a descricao!")]
 		[StringLength(100)]
-
 		public string Description { get; set; }
 
 	}
