@@ -32,6 +32,9 @@ namespace TodoListAPI.Application.Services
 		public async Task<Notes> Create(NoteVO noteVO)
 		{
 			var noteEntity = _mapper.Map<Notes>(noteVO);
+			if (!noteEntity.ValidDescription())
+				throw new Exception("Informar uma descrição!");
+
 			return await _repository.Create(noteEntity);
 		}
 

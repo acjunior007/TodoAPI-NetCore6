@@ -24,13 +24,17 @@ builder.Services.AddControllers().AddNewtonsoftJson(options =>
 builder.Services.AddDbContext<DBTodoAPPContext>(options =>
 	options.UseSqlServer(
 		builder.Configuration.GetConnectionString("conn")
-		));
+		)
+	);
+
+
 
 builder.Services.AddTransient<INoteRepository, NoteRepository>();
 builder.Services.AddTransient<INoteService, NoteService>();
 
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
+
 
 var app = builder.Build();
 
