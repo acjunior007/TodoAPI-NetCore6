@@ -44,6 +44,8 @@ namespace TodoListAPI.Application.Services
 			var note = await _repository.GetNote(id);
 			note.Description = noteVO.Description;
 			note.DateUpdated = DateTime.Now;
+			note.Active = noteVO.Active;
+
 			return await _repository.Update(note);
 		}
 
