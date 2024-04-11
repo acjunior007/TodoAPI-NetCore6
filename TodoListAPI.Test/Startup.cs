@@ -16,12 +16,6 @@ namespace TodoListAPI.Test
 {
 	public class Startup
 	{
-		// private readonly IConfiguration _configuration;
-
-		//public Startup(IConfiguration configuration)
-		//{
-		//	_configuration = configuration;
-		//}
 		public void ConfigureServices(IServiceCollection services)
 		{
 
@@ -52,6 +46,7 @@ namespace TodoListAPI.Test
 			services.AddScoped<INoteService, NoteService>();
 
 			services.AddSingleton<IServiceProvider>(provider);
+
 		}
 
 		public void Configure(IServiceProvider provider, ILoggerFactory loggerFactory, ITestOutputHelperAccessor accessor)
@@ -59,6 +54,13 @@ namespace TodoListAPI.Test
 			loggerFactory.AddProvider(new XunitTestOutputLoggerProvider(accessor));
 			if (provider is null)
 				Console.WriteLine("Provider is not from startup.configure");
+
+			using (var scope = provider?.CreateScope())
+			{
+				var service = scope?.ServiceProvider;
+				var dbTodoAppContext = service?.GetRequiredService<DBTodoAPPContext>();
+				dbTodoAppContext.Database.Migrate();
+			}
 		}
 	}
 }
