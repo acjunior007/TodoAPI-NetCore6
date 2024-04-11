@@ -13,6 +13,36 @@ namespace TodoListAPI.Infra.Context
 		{
 			base.OnModelCreating(modelBuilder);
 			modelBuilder.ApplyConfigurationsFromAssembly(typeof(DBTodoAPPContext).Assembly);
+
+			modelBuilder.Entity<Notes>().HasData(new Notes
+			{
+				Id = 1,
+				Description = $"Description_{DateTime.Now.Second}_01",
+			});
+
+			modelBuilder.Entity<Notes>().HasData(new Notes
+			{
+				Id = 2,
+				Description = $"Description_{DateTime.Now.Second}_02",
+			});
+
+			modelBuilder.Entity<Notes>().HasData(new Notes
+			{
+				Id = 3,
+				Description = $"Description_{DateTime.Now.Second}_03",
+			});
+
+			modelBuilder.Entity<Notes>().HasData(new Notes
+			{
+				Id = 4,
+				Description = $"Description_{DateTime.Now.Second}_04",
+			});
+
+			modelBuilder.Entity<Notes>().HasData(new Notes
+			{
+				Id = 5,
+				Description = $"Description_{DateTime.Now.Second}_05",
+			});
 		}
 	}
 }

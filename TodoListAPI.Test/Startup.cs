@@ -42,8 +42,8 @@ namespace TodoListAPI.Test
 			services.AddSingleton<IConfiguration>(configuration);
 			services.AddLogging(logging => logging.AddConsole());
 
-			services.AddScoped<INoteRepository, NoteRepository>();
-			services.AddScoped<INoteService, NoteService>();
+			services.AddSingleton<INoteRepository, NoteRepository>();
+			services.AddSingleton<INoteService, NoteService>();
 
 			services.AddSingleton<IServiceProvider>(provider);
 

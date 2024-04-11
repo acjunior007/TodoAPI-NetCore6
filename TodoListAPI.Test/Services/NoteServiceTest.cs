@@ -16,7 +16,7 @@ namespace TodoListAPI.Test.Services
 		}
 
 		[Fact]
-		public async void InvalidDescriptionNewCreateAsync()
+		public async Task CreateNote_DescriptionWithoutValue_Exception()
 		{
 			var noteVO = new NoteVO();
 			try
@@ -29,24 +29,10 @@ namespace TodoListAPI.Test.Services
 			{
 				Assert.IsType<Exception>(ex);
 			}
-
-			//Assert.True(true);
 		}
 
 		[Fact]
-		public async void GetNoteAsync()
-		{
-			//// Arrange
-			var noteVO = new NoteVO() { Description = "Description test" };
-
-			var note = await _noteService.Create(noteVO);
-			var isCreate = note.Id > 0;
-
-			Assert.True(isCreate);
-		}
-
-		[Fact]
-		public async void CreateNoteAsync()
+		public async void CreateNote_DescriptionWithValue_NoteCreated()
 		{
 			var noteVO = new NoteVO() { Description = "Description test" };
 
@@ -57,26 +43,24 @@ namespace TodoListAPI.Test.Services
 		}
 
 		[Fact]
-		public async void UpdateNoteAsync()
+		public async void UpdateNote_NewValueDescription_NoteUpdated()
 		{
-			// Arrange
-			var noteVO = new NoteVO() { Id = 1, Description = "Description test update" };
+			var id = 3;
+			var noteVO = new NoteVO() { Id = id, Description = "Description test update.." };
 
-			var note = await _noteService.Update(1, noteVO);
+			var note = await _noteService.Update(id, noteVO);
 			var isCreate = note.Id > 0;
+
 			Assert.True(isCreate);
 		}
 
 		[Fact]
-		public async void DeleteNoteAsync()
+		public async void DeleteNote_ById_ReturnsTrue()
 		{
-			// Arrange
-			var id = 1;
-
+			var id = 4;
 			var isDeleted = await _noteService.Delete(id);
 
 			Assert.True(isDeleted);
-
 		}
 	}
 }
