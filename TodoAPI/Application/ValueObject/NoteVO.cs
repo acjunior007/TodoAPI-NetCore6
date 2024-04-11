@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TodoListAPI.Application.ValueObject
+﻿namespace TodoListAPI.Application.ValueObject
 {
 	public class NoteVO
 	{

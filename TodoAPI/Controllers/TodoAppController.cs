@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TodoListAPI.Application.ValueObject;
 using TodoListAPI.Domain.Interface;
-using TodoListAPI.Domain.Models;
 
 namespace TodoListAPI.Controllers
 {
