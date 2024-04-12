@@ -30,23 +30,26 @@ namespace TodoListAPI.Application.Services
 			return _mapper.Map<NoteVO>(note);
 		}
 
-		public async Task<Notes> Create(NoteVO noteVO)
+		public async Task<NoteVO> Create(NoteVO noteVO)
 		{
-			var noteEntity = _mapper.Map<Notes>(noteVO);
-			if (!noteEntity.ValidDescription())
+			var newNote = _mapper.Map<Notes>(noteVO);
+			if (!newNote.ValidDescription())
 				throw new Exception("Informar uma descrição!");
 
-			return await _repository.Create(noteEntity);
+			newNote = await _repository.Create(newNote);
+
+			return _mapper.Map<NoteVO>(newNote);
 		}
 
-		public async Task<Notes> Update(int id, NoteVO noteVO)
+		public async Task<NoteVO> Update(int id, NoteVO noteVO)
 		{
 			var note = await _repository.GetNote(id);
 			note.Description = noteVO.Description;
 			note.DateUpdated = DateTime.Now;
 			note.Active = noteVO.Active;
 
-			return await _repository.Update(note);
+			var noteUpdated = await _repository.Update(note);
+			return _mapper.Map<NoteVO>(noteUpdated);
 		}
 
 		public async Task<bool> Delete(int id)

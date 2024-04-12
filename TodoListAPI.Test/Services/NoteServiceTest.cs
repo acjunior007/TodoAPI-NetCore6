@@ -34,10 +34,8 @@ namespace TodoListAPI.Test.Services
 		[Fact]
 		public async void CreateNote_DescriptionWithValue_NoteCreated()
 		{
-			var noteVO = new NoteVO() { Description = "Description test" };
-
-			var note = await _noteService.Create(noteVO);
-			var isCreate = note.Id > 0;
+			NoteVO noteVO = await CreateNote();
+			var isCreate = noteVO.Id > 0;
 
 			Assert.True(isCreate);
 		}
@@ -45,11 +43,11 @@ namespace TodoListAPI.Test.Services
 		[Fact]
 		public async void UpdateNote_NewValueDescription_NoteUpdated()
 		{
-			var id = 3;
-			var noteVO = new NoteVO() { Id = id, Description = "Description test update.." };
+			NoteVO noteVO = await CreateNote();
+			NoteVO noteVOUpdate = new NoteVO() { Id = noteVO.Id, Description = "Description test update.." };
 
-			var note = await _noteService.Update(id, noteVO);
-			var isCreate = note.Id > 0;
+			NoteVO noteUpdated = await _noteService.Update(noteVO.Id, noteVOUpdate);
+			var isCreate = noteUpdated.Id > 0;
 
 			Assert.True(isCreate);
 		}
@@ -57,10 +55,20 @@ namespace TodoListAPI.Test.Services
 		[Fact]
 		public async void DeleteNote_ById_ReturnsTrue()
 		{
-			var id = 4;
-			var isDeleted = await _noteService.Delete(id);
+			NoteVO noteVO = await CreateNote();
+			var isDeleted = await _noteService.Delete(noteVO.Id);
 
 			Assert.True(isDeleted);
 		}
+
+		#region Privates methods
+		private async Task<NoteVO> CreateNote()
+		{
+			var noteVO = new NoteVO() { Description = "Description test" };
+
+			var noteCreated = await _noteService.Create(noteVO);
+			return noteCreated;
+		}
+		#endregion
 	}
 }
